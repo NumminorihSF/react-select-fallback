@@ -1,0 +1,35 @@
+{
+  "name": "react-select-fallback",
+  "version": "0.9.0",
+  "description": "Select element for react interfaces with fallback to native html select",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NumminorihSF/react-select-fallback.git"
+  },
+  "keywords": [
+    "reactjs",
+    "select",
+    "fallback",
+    "isomorph",
+    "server-render"
+  ],
+  "author": "Konstantine Petryaev <numminorihsf@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NumminorihSF/react-select-fallback/issues"
+  },
+  "homepage": "https://github.com/NumminorihSF/react-select-fallback#readme",
+  "peerDependencies": {
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0"
+  },
+  "devDependencies": {
+    "babel-preset-react": "^6.5.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2"
+  }
+}
