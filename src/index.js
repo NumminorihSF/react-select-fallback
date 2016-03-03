@@ -16,6 +16,13 @@ var globalState = {
     if (index !== -1){
       globalState.subscribers.splice(index, 1);
     }
+  },
+  setMobileState: function(val){
+    var value = !!val;
+    globalState.isMobile = !!value;
+    globalState.subscribers.forEach(function(s){
+      s.setTouchDevice(value)
+    });
   }
 };
 
@@ -79,8 +86,11 @@ var Select = React.createClass({
       globalState.removeSubscriber(this);
     }
   },
+  onTouchStart: function(){
+    globalState.setMobileState(true);
+  },
   setTouchDevice: function(val){
-    this.setState({touchDevice: !!val});
+    this.setState({touchDevice: val});
   },
   renderFallback: function(){
     return <FallbackSelect className={this.props.className}
@@ -112,7 +122,7 @@ var Select = React.createClass({
 
     if (this.props.children instanceof Array){
       var props = this.props;
-      return <div style={{display: "inline"}}>
+      return <div style={{display: "inline"}} onTouchStart={this.onTouchStart}>
         {
           this.props.children.map(function(child, i){
             return <child key={i}
@@ -133,7 +143,7 @@ var Select = React.createClass({
         }
       </div>;
     }
-    return <div style={{display: "inline"}}>
+    return <div style={{display: "inline"}} onTouchStart={this.onTouchStart}>
       <this.props.children onChange={this.props.onChange}
                            options={this.props.options}
                            autoFocus={this.props.autoFocus}

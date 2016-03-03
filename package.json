@@ -1,6 +1,6 @@
 {
   "name": "react-select-fallback",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Select element for react interfaces with fallback to native html select",
   "main": "index.js",
   "scripts": {
