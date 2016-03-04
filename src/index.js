@@ -137,7 +137,7 @@ var Select = React.createClass({
                            defaultValue={this.props.defaultValue}/>;
   },
   render: function(){
-    if (!this.state.children){
+    if (!this.props.children){
       return this.renderFallback();
     }
     if (!this.state.jsEnabled) {
