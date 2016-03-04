@@ -1,9 +1,10 @@
 {
   "name": "react-select-fallback",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "description": "Select element for react interfaces with fallback to native html select",
   "main": "index.js",
   "scripts": {
+    "prepublish": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
