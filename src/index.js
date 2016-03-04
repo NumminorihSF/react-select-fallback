@@ -2,6 +2,8 @@
  * Created by numminorihsf on 03.03.16.
  */
 var React = require('react');
+var SPLIT_LENGTH = 100;
+var UPDATE_TIMEOUT = 100;
 
 var globalState = {
   isMobile: false,
@@ -17,10 +19,36 @@ var globalState = {
       globalState.subscribers.splice(index, 1);
     }
   },
-  setMobileState: function(val){
+  setMobileState: function(val, elem){
     var value = !!val;
     globalState.isMobile = !!value;
-    globalState.subscribers.forEach(function(s){
+    elem.setTouchDevice(value);
+    globalState._setMobileState(globalState.subscribers, value, elem);
+  },
+  _setMobileState: function(array, value, elem){
+    var arrs = array.reduce(function(res, val){
+      res.result[res.currentIndex] = res.result[res.currentIndex] || [];
+      if (res.result[res.currentIndex].length + 1 > SPLIT_LENGTH){
+        res.currentIndex++;
+        res.result[res.currentIndex] = [];
+      }
+      if (val === elem) return res;
+      res.result[res.currentIndex].push(val);
+      return res;
+    }, {currentIndex: 0, result: []}).result;
+    globalState._setMobileStateAsync(arrs, value, 0);
+  },
+  _setMobileStateAsync: function(arr, val, i){
+    i = i || 0;
+    setTimeout(function(){
+      globalState._smallSetMobileState(arr[i], val);
+      if (++i >= arr.length) return;
+      globalState._setMobileStateAsync(arr, val, i);
+    }, UPDATE_TIMEOUT);
+
+  },
+  _smallSetMobileState: function(smallArray, value){
+    smallArray.forEach(function(s){
       s.setTouchDevice(value)
     });
   }
@@ -87,7 +115,7 @@ var Select = React.createClass({
     }
   },
   onTouchStart: function(){
-    globalState.setMobileState(true);
+    globalState.setMobileState(true, this);
   },
   setTouchDevice: function(val){
     this.setState({touchDevice: val});
@@ -120,43 +148,8 @@ var Select = React.createClass({
       return this.renderFallback();
     }
 
-    if (this.props.children instanceof Array){
-      var props = this.props;
-      return <div style={{display: "inline"}} onTouchStart={this.onTouchStart}>
-        {
-          this.props.children.map(function(child, i){
-            return <child key={i}
-                          onChange={props.onChange}
-                          options={props.options}
-                          autoFocus={props.autoFocus}
-                          disabled={props.disabled}
-                          form={props.form}
-                          multiple={props.multiple}
-                          name={props.name}
-                          required={props.required}
-                          size={props.size}
-                          tabIndex={props.tabIndex}
-                          accessKey={props.accessKey}
-                          value={props.value}
-                          defaultValue={props.defaultValue}/>
-          })
-        }
-      </div>;
-    }
-    return <div style={{display: "inline"}} onTouchStart={this.onTouchStart}>
-      <this.props.children onChange={this.props.onChange}
-                           options={this.props.options}
-                           autoFocus={this.props.autoFocus}
-                           disabled={this.props.disabled}
-                           form={this.props.form}
-                           multiple={this.props.multiple}
-                           name={this.props.name}
-                           required={this.props.required}
-                           size={this.props.size}
-                           tabIndex={this.props.tabIndex}
-                           accessKey={this.props.accessKey}
-                           value={this.props.value}
-                           defaultValue={this.props.defaultValue}/>
+    return <div style={{display: "inline-block"}} onTouchStart={this.onTouchStart}>
+      {this.props.children}
     </div>;
   }
 });
