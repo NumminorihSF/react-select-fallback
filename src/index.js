@@ -6,6 +6,7 @@ var SPLIT_LENGTH = 100;
 var UPDATE_TIMEOUT = 100;
 
 var globalState = {
+  isScripted: false,
   isMobile: false,
   subscribers: [],
   addSubscriber: function(subs){
@@ -85,7 +86,7 @@ var FallbackSelect = React.createClass({
 var Select = React.createClass({
   getInitialState: function(){
     return {
-      jsEnabled: false,
+      jsEnabled: globalState.isScripted,
       touchDevice: globalState.isMobile
     };
   },
@@ -107,6 +108,7 @@ var Select = React.createClass({
     if (this.props.optimiseForMobile !== false){
       globalState.addSubscriber(this);
     }
+    globalState.isScripted = true;
     this.setState({jsEnabled: true});
   },
   componentWillUnmount: function(){
@@ -137,7 +139,6 @@ var Select = React.createClass({
                            defaultValue={this.props.defaultValue}/>;
   },
   render: function(){
-    console.log(this.props.children, this.state);
     if (!this.props.children){
       return this.renderFallback();
     }
