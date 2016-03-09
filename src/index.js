@@ -151,7 +151,7 @@ var Select = React.createClass({
     }
 
     return <div style={{display: "inline-block"}} onTouchStart={this.onTouchStart}>
-      <input type="hidden" value={this.props.value}/>
+      <input type="hidden" name={this.props.name} value={this.props.value}/>
       {this.props.children}
     </div>;
   }
