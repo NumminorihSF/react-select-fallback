@@ -160,7 +160,7 @@ var Select = React.createClass({
     return React.createElement(
       'div',
       { style: { display: "inline-block" }, onTouchStart: this.onTouchStart },
-      React.createElement('input', { type: 'hidden', value: this.props.value }),
+      React.createElement('input', { type: 'hidden', name: this.props.name, value: this.props.value }),
       this.props.children
     );
   }
