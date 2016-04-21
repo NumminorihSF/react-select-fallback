@@ -62,6 +62,9 @@ var FallbackSelect = React.createClass({
       options: []
     };
   },
+  onChange: function (e) {
+    this.props.onChange(e.target.value);
+  },
   render: function () {
     var options = this.props.options.map(function (opt, i) {
       return React.createElement(
@@ -72,7 +75,7 @@ var FallbackSelect = React.createClass({
     });
     return React.createElement(
       'select',
-      { onChange: this.props.onChange,
+      { onChange: this.onChange.bind(this),
         autoFocus: this.props.autoFocus,
         disabled: this.props.disabled,
         form: this.props.form,

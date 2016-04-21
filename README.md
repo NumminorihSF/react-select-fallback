@@ -42,7 +42,7 @@ var FSelect = require('react-select-fallback');
 	Property	|	Type		|	Default		|	Description
 :-----------------------|:--------------|:--------------|:--------------------------------
 className | string | `''` | css class for html `select` element. also is passed to children 
-onChange  | function| `function(){}` | onChange listener
+onChange  | function| `function(){}` | onChange listener 1st argument is an value of selected options
 options   | object[] | `[]` | array of object with fields `'name'` (displayed name of value), `'value'`
 autoFocus | boolean | `false` | html autofocus prop
 disabled | boolean | `false` | html disabled prop
