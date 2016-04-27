@@ -1,6 +1,6 @@
 {
   "name": "react-select-fallback",
-  "version": "0.9.9",
+  "version": "1.0.0",
   "description": "Select element for react interfaces with fallback to native html select",
   "main": "index.js",
   "scripts": {
@@ -26,8 +26,8 @@
   },
   "homepage": "https://github.com/NumminorihSF/react-select-fallback#readme",
   "peerDependencies": {
-    "react": "^0.14.0",
-    "react-dom": "^0.14.0"
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1"
   },
   "devDependencies": {
     "babel-preset-react": "^6.5.0",

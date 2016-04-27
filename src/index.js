@@ -68,7 +68,7 @@ var FallbackSelect = React.createClass({
     var options = this.props.options.map(function(opt, i){
       return <option key={i} value={opt.value}>{opt.name}</option>;
     });
-    return <select onChange={this.onChange.bind(this)}
+    return <select onChange={this.onChange}
                    className={this.props.className}
                    autoFocus={this.props.autoFocus}
                    disabled={this.props.disabled}
