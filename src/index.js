@@ -66,7 +66,7 @@ var FallbackSelect = React.createClass({
   },
   render: function(){
     var options = this.props.options.map(function(opt, i){
-      return <option key={i} value={opt.value}>{opt.name}</option>;
+      return <option key={i} value={opt.value} disabled={!!opt.disabled}>{opt.name}</option>;
     });
     return <select onChange={this.onChange}
                    className={this.props.className}
